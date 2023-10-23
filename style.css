@@ -1,0 +1,58 @@
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: #222;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.header {
+    background-color: rgb(23, 23, 23);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header h1 {
+    justify-self: center;
+    align-self: center;
+    margin-left: 25px;
+}
+
+.header a {
+    justify-self: center;
+    align-self: center;
+    margin-right: 25px;
+}
+
+button {
+    background-color: rgb(48, 120, 201);
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    color: white;
+    font-weight: 700;
+    border: none;
+}
+
+button:hover {
+    background-color: rgb(96, 146, 203);
+    transition: 0.25s;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex: 1;
+    margin-top: 50px;
+}
+
+.library {
+    height: 300px;
+    width: 600px;
+    background-color: rgb(196, 196, 196);
+}
+
