@@ -49,6 +49,7 @@ td button {
 .container {
     display: grid;
     margin: 50px;
+    text-align: center;
 }
 
 .library {
@@ -89,3 +90,29 @@ tr:nth-child(odd) td {
 caption {
   padding: 10px;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form button {
+    width: 100px;
+    height: 40px;
+}
+
+label {
+    align-self: flex-start;
+}
+
+::backdrop {
+    background-image: linear-gradient(
+      45deg,
+      magenta,
+      rebeccapurple,
+      dodgerblue,
+      green
+    );
+    opacity: 0.75;
+  }

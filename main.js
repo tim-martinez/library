@@ -17,11 +17,17 @@ function addBook(book) {
 };
 
 //manually add first 2 default books to array
-addBook(testBook);
 addBook(testBook2);
+addBook(testBook);
 
 //create table for books here 
 function libraryTable(library){
+    const addBtn = document.querySelector('#addBtn');
+    addBtn.addEventListener('click', () => {
+        const modal = document.querySelector('#modal');
+        modal.showModal();
+    });
+
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
@@ -35,38 +41,57 @@ function libraryTable(library){
     };
 
     //add 'Remove' to header
-    const th = document.createElement('th');
-    th.textContent = 'Remove';
-    header.appendChild(th);
-   
-    thead.appendChild(header);
-    table.appendChild(thead);
+    if (library.length > 0){ 
+        const th = document.createElement('th');
+        th.textContent = 'Remove';
+        header.appendChild(th);
+    
+        thead.appendChild(header);
+        table.appendChild(thead);
+    };
 
+    //if library is empty display message
+    if (library.length == 0){
+        const empty = document.createElement('h3');
+        empty.textContent = 'Add a book to get started'
+        container.appendChild(empty);
+    }
     //create table body
-    library.forEach(element => {
+    library.forEach(function (element,index) {
         const row = document.createElement('tr');
         const keys = Object.keys(element);
-
         keys.forEach(key => {
             const td = document.createElement('td');
             td.textContent = element[key];
             row.appendChild(td);
         });
-
-        //add 'remove' button 
+        //add 'remove' button to table
         const td = document.createElement('td');
-        const btn = document.createElement('button')
-        btn.id = element.title;
-        btn.textContent = "remove";
+        const btn = document.createElement('button');
+        btn.className = 'remove';
+        btn.id = index;
+        btn.textContent = 'remove';
         td.appendChild(btn);
         row.appendChild(td);
         tbody.appendChild(row);
         table.appendChild(tbody);
     });
-
     container.appendChild(table);
 };
 
+
 libraryTable(myLibrary);
+//remove book from myLibrary
+container.addEventListener('click', (event) => {
+    if (event.target.classList.contains('remove')) {
+        const button = event.target;
+        const index = button.id;
+        myLibrary.splice(index, 1);
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        };
+        libraryTable(myLibrary);
+    };
+});
 
 
