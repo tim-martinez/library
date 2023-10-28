@@ -1,7 +1,5 @@
 const myLibrary = [];
 const container = document.querySelector('#container');
-const testBook = new Book('Tim', 'Javascript101', '100', 'read');
-const testBook2 = new Book('Rick Ross', 'Every Day Im Hustlin', '250', 'in progress');
 
 //object constructor 
 function Book(author,title,pages,status) {
@@ -16,17 +14,8 @@ function addBook(book) {
     myLibrary.push(book);
 };
 
-//manually add first 2 default books to array
-addBook(testBook2);
-addBook(testBook);
-
 //create table for books here 
 function libraryTable(library){
-    const addBtn = document.querySelector('#addBtn');
-    addBtn.addEventListener('click', () => {
-        const modal = document.querySelector('#modal');
-        modal.showModal();
-    });
 
     const table = document.createElement('table');
     const thead = document.createElement('thead');
@@ -79,7 +68,6 @@ function libraryTable(library){
     container.appendChild(table);
 };
 
-
 libraryTable(myLibrary);
 //remove book from myLibrary
 container.addEventListener('click', (event) => {
@@ -94,4 +82,41 @@ container.addEventListener('click', (event) => {
     };
 });
 
+//add book open the model
+const addBtn = document.querySelector('#addBtn');
+    addBtn.addEventListener('click', () => {
+        const modal = document.querySelector('#modal');
+        modal.showModal();
+    });
 
+//add event listener for the saveBtn
+const saveBtn = document.querySelector('#saveBtn');
+
+saveBtn.addEventListener('click', (event) => {
+    //prevent submit form to server
+    event.preventDefault();
+
+    //retrieve the values from the form submissions
+
+    const form = document.querySelector('form');
+    const modal = document.querySelector('#modal');
+    const author = document.querySelector('#author').value;
+    const title = document.querySelector('#title').value;
+    const pages = document.querySelector('#pages').value;
+    const inProgress = document.querySelector('#inProgress');
+    const finished = document.querySelector('#finished');
+    const status = inProgress.checked ? 'In progress' : finished.checked ? 'Finished' : 'not specified';
+
+    const newBook = new Book(author, title, pages, status);
+    console.table(newBook);
+    addBook(newBook);
+
+    // Clear container
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    //generate table, reset form, and close dialog
+    libraryTable(myLibrary);
+    form.reset();
+    modal.close();
+});
